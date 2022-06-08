@@ -156,9 +156,9 @@ RunService.Stepped:Connect(movePlatform)
 
 ---
 
-## Day 5: Treasure Hunt Game
+## Day 5 - Treasure Hunt Game
 
-### HidingSpots Script:
+### Part 1 - HidingSpots Script:
 
 ```lua
 local Locations = {} -- variable named Locations set to empty list
@@ -228,3 +228,46 @@ end)
 
 spawnOrb() -- run the spawnOrb function
 ```
+
+> The spheres that they place should have disappeared except for one. They are looking for the glowing sphere. When it is touched, it will hide somewhere else.
+
+> REMEMBER: They can add more hiding spots even after making the script, just add more spheres to the folder!
+
+---
+
+## Part 2 - Hazard/Damage Script:
+
+```lua
+local poisonTimers = {}
+
+local function findPlayerFromCharacter(char)
+	for i,v in pairs(game.Players:players())do
+		if(v.Character == char)then return v;end;
+	end
+end
+
+script.Parent.Touched:Connect(function(part)
+	local h = part.Parent:findFirstChild('Humanoid');
+	if(h)then
+		local player = findPlayerFromCharacter(h.Parent);
+		if(player)then
+			if(poisonTimers[player])then
+				poisonTimers[player] = os.time() + 5
+			else
+				poisonTimers[player] = os.time() + 5
+				while(true)do
+					local t = poisonTimers[player]
+					if(t)then
+						if(os.time() < t)then
+							h:TakeDamage(8)
+						else poisonTimers[player] = nil end;
+					else break end
+					wait(1)
+				end
+			end
+		end
+	end
+end)
+```
+
+> Add this script to the chosen hazard object, the same way that we have done it for the whole week.
