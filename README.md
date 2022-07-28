@@ -88,7 +88,7 @@ spawn.Touched:connect(function(hit)
     local checkpointData = game.ServerStorage:FindFirstChild("CheckpointData")
     if not checkpointData then
       checkpointData = Instance.new("Model", game.ServerStorage)
-      checkpointData.Name = "checkpointData"
+      checkpointData.Name = "CheckpointData"
     end
     
     local checkpoint = checkpointData:FindFirstChild(tostring(player.userId))
@@ -101,7 +101,7 @@ spawn.Touched:connect(function(hit)
         local newUser = tostring(player.userId)
         local newData = game.ServerStorage.CheckpointData[newUser].Value.CFrame
         local newCheckpoint = newData + Vector3.new(0, 4, 0)
-        character:WaitForChild("HumanoidRootPart").CFrame = newcheckpoint
+        character:WaitForChild("HumanoidRootPart").CFrame = newCheckpoint
       end)
     end
     
